@@ -136,9 +136,6 @@ class HBNBCommand(cmd.Cmd):
                     value = param[1]
                     if value[:1] == '"' and value[-1:] == '"':
                         param[1] = param[1].strip('"')
-                        if '"' in param[1]:
-                            param[1] = param[1].replace('"', '\\')
-                        param[1] = str(param[1])
                         if '_' in value:
                             param[1] = param[1].replace('_', ' ')
                     elif '.' in value:
