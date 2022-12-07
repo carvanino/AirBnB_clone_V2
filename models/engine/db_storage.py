@@ -9,6 +9,7 @@ from sqlalchemy.orm import scoped_session
 from models.base_model import BaseModel, Base
 from models.user import User
 from models.state import State
+from models.place import Place
 from models.city import City
 from models.amenity import Amenity
 """
@@ -48,7 +49,7 @@ class DBStorage:
 
         objDict = {}
         if cls is None:
-            classes = {'State': State, 'City': City, 'User': User}
+            classes = {'State': State, 'City': City, 'User': User, 'Place': Place}
             for key, value in classes.items():
                 # print("Here")
                 objct = self.__session.query(value).all()
