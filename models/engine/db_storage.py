@@ -48,7 +48,7 @@ class DBStorage:
 
         objDict = {}
         if cls is None:
-            classes = {'State': State, 'City': City}
+            classes = {'State': State, 'City': City, 'User': User}
             for key, value in classes.items():
                 # print("Here")
                 objct = self.__session.query(value).all()
