@@ -11,7 +11,9 @@ from models.user import User
 from models.state import State
 from models.place import Place
 from models.city import City
+from models.review import Review
 from models.amenity import Amenity
+
 """
 from models.base_model import Base
 from models.user import User
@@ -49,7 +51,7 @@ class DBStorage:
 
         objDict = {}
         if cls is None:
-            classes = {'State': State, 'City': City, 'User': User, 'Place': Place}
+            classes = {'State': State, 'City': City, 'User': User, 'Place': Place, 'Review': Review}
             for key, value in classes.items():
                 # print("Here")
                 objct = self.__session.query(value).all()
