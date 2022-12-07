@@ -4,6 +4,7 @@ import cmd
 import sys
 import re
 from models.base_model import BaseModel
+import models
 from models.__init__ import storage
 from models.user import User
 from models.place import Place
@@ -129,17 +130,18 @@ class HBNBCommand(cmd.Cmd):
         clsName_id = "{}.{}".format(args[0], new_instance.id)
         # obj = obj_dict[clsName_id]
         obj_dict[clsName_id] = new_instance
+        # dictObj = new_instance.to_dict()
         dictObj = new_instance.__dict__
-        #dictObj = obj.__dict__
+        # dictObj = obj.__dict__
         if len(args) >= 2:
             for arg in args:
                 if re.search(r'[=]', arg):
-                    param = arg.split('=') # <key>=<value>
+                    param = arg.split('=')  # <key>=<value>
                     value = param[1]
                     if value[:1] == '"' and value[-1:] == '"':
                         param[1] = param[1].strip('"')
                         if '"' in param[1]:
-                            param[1]= param[1].replace('"', '\\')
+                            param[1] = param[1].replace('"', '\\')
                         param[1] = str(param[1])
                         if '_' in value:
                             param[1] = param[1].replace('_', ' ')
@@ -149,11 +151,15 @@ class HBNBCommand(cmd.Cmd):
                         param[1] = str(param[1])
                     else:
                         param[1] = int(param[1])
+                    # obj_dict[param[0]] = param[1]
                     dictObj[param[0]] = param[1]
 
-        storage.save()
+        # models.storage.new(self)
+        models.storage.save()
+        models.storage.new(new_instance)
         print(new_instance.id)
-        storage.save()
+        # print(obj_dict)
+        models.storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -236,14 +242,15 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return
             for k, v in storage.all().items():
-            # for k, v in storage._FileStorage__objects.items():
+                # for k, v in storage._FileStorage__objects.items():
                 if k.split('.')[0] == args:
-                    print_list.append(str(v))
+                    print_list.append((v.__str__()))
+                # print_list.append(str(v))
         else:
             for k, v in storage.all().items():
-            # for k, v in storage._FileStorage__objects.items():
-                print_list.append(str(v))
-
+                # for k, v in storage._FileStorage__objects.items():
+                print_list.append((v.__str__))
+                # print_list.append(str(v))
         print(print_list)
 
     def help_all(self):
@@ -350,6 +357,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
