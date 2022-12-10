@@ -7,22 +7,22 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from os import getenv
 
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    class State(BaseModel, Base):
+        """ State class """
 
-class State(BaseModel):
-    """ State class """
-
-    if getenv('HBNB_TYPE_STORAGE') == 'db':
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
         cities = relationship('City', cascade="all, delete", backref='state')
-    else:
+else:
+    class State(BaseModel):
+        """ State class """
+
         name = ""
 
-    def __init__(self, *args, **kwargs):
-        """initializes state"""
-        super().__init__(*args, **kwargs)
-
-    if getenv("HBNB_TYPE_STORAGE") != "db":
+        #def __init__(self, *args, **kwargs):
+            #"""initializes state"""
+            #super().__init__(*args, **kwargs)
         @property
         def cities(self):
             """City objects getter"""
