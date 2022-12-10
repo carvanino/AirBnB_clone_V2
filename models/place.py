@@ -19,7 +19,7 @@ place_amenity = Table('place_amenity', metadata,
 """
 
 
-class Place(BaseModel, Base):
+class Place(BaseModel):
     """ A place to stay """
 
     __tablename__ = 'places'
