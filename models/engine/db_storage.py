@@ -2,6 +2,7 @@
 """
 Strorage engine for database
 """
+import models
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -51,7 +52,13 @@ class DBStorage:
 
         objDict = {}
         if cls is None:
-            classes = {'State': State, 'City': City, 'User': User, 'Place': Place, 'Review': Review}
+            classes = {
+                    'State': State,
+                    'City': City,
+                    'User': User,
+                    'Place': Place,
+                    'Review': Review,
+                    'Amenity': Amenity}
             for key, value in classes.items():
                 # print("Here")
                 objct = self.__session.query(value).all()

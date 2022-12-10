@@ -12,7 +12,7 @@ Base = declarative_base()
 class BaseModel:
     """A base class for all hbnb models"""
 
-    id = Column(String(60), nullable=False, unique=True, primary_key=True)
+    id = Column(String(60), nullable=False, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
@@ -25,14 +25,31 @@ class BaseModel:
             self.updated_at = datetime.now()
             # storage.new(self)
         else:
-            for key, value in kwargs.items():
-                setattr(self, key, value)
-                # kwargs['updated_at'] = datetime.strptime(kwargs['updated_at']
-                # '%Y-%m-%dT%H:%M:%S.%f')
-            # kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                # '%Y-%m-%dT%H:%M:%S.%f')
-            # del kwargs['__class__']
+            if kwargs.get('id', None) is None:
+                self.id = str(uuid.uuid4())
+
+            if kwargs.get('updated_at', None) is not None:
+                kwargs['updated_at'] = datetime.\
+                    strptime(kwargs['updated_at'],
+                             '%Y-%m-%dT%H:%M:%S.%f')
+
+            if kwargs.get('created_at', None) is not None:
+                kwargs['created_at'] = datetime.\
+                    strptime(kwargs['created_at'],
+                             '%Y-%m-%dT%H:%M:%S.%f')
+
+            if kwargs.get('__class__', None) is not None:
+                del kwargs['__class__']
+
             self.__dict__.update(kwargs)
+            # for key, value in kwargs.items():
+            # setattr(self, key, value)
+            # kwargs['updated_at'] = datetime.strptime(kwargs['updated_at']
+            # '%Y-%m-%dT%H:%M:%S.%f')
+            # kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
+            # '%Y-%m-%dT%H:%M:%S.%f')
+            # del kwargs['__class__']
+            # self.__dict__.update(kwargs)
 
     def __str__(self):
         """Returns a string representation of the instance"""
@@ -44,14 +61,14 @@ class BaseModel:
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
-        from models import storage
+        # from models import storage
         self.updated_at = datetime.now()
         models.storage.new(self)
         models.storage.save()
         # print("Save from basemodel works")
 
     def to_dict(self):
-        """Convert instance into dict format"""
+        "data.drop_all(s""Convert instance into dict format"""
         dictionary = {}
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
