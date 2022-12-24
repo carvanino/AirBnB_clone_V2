@@ -5,6 +5,7 @@ function deploy
 """
 
 from fabric.api import *
+from os.path import isfile
 from datetime import datetime
 
 
@@ -21,7 +22,7 @@ def do_pack():
 
         local('mkdir -p versions')
         arclocal = local(
-                "tar -czvf {} web_static/".format(
+                "tar -cvzf {} web_static/".format(
                     arcfile), capture=True)
         return arclocal
     except err:
@@ -83,6 +84,8 @@ def deploy():
 
     arch_path = do_pack()
     if not arch_path:
+        print('yes')
         return False
-    do_deploy(arch_path)
-    return do_deploy(arch_path)
+    # print(arch_path.__dict__)
+    deploy = arch_path.__dict__['command'].split(" ")[2]
+    return do_deploy(deploy)
