@@ -40,7 +40,7 @@ server {
         root /var/www/html;
         index index.html index.htm index.nginx-debian.html;
 
-        add_header X-Served-By /$HOSTNAME;
+        add_header X-Served-By \$HOSTNAME;
 
         error_page 404 /error404.html;
         location = /error404.html {
