@@ -21,8 +21,6 @@ def do_deploy(archive_path):
     and links to /data/web_static/releases/<archive filename without extension>
     """
 
-    # env.hosts = ['3.84.238.247', '52.91.120.191']
-    # env.user = "ubuntu"
     if not isfile(archive_path):
         return False
     # Uploads the archive to /tmp/ directory of the web servers
@@ -37,21 +35,24 @@ def do_deploy(archive_path):
     archfile = archfile[0]
     # archfile = 'web_static_20170315003959'
 
-    run('rm -rf /data/web_static/releases/{}/'.format(archfile))
     run('mkdir -p /data/web_static/releases/{}/'.format(archfile))
 
     # Uncompress the archive to the folder /data/web_static/releases/filename
-    # run('rm -rf /data/web_static/releases/{}/'.format(archfile))
     run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/" .format(
         archfile_we, archfile))
     # Deletes the archive from the web server
     run('rm /tmp/{}'.format(archfile_we))
-    run("mv /data/web_static/releases/{}/web_static/*\
-            /data/web_static/releases/{}/ ".format(archfile, archfile))
-    run('rm -rf /data/web_static/releases/{}/web_static'.format(archfile))
+
+    # run('rm -rf /data/web_static/releases/{}/web_static'.format(archfile))
+
     # Delete the symbolic link /data/web_static/current
     run('rm -rf /data/web_static/current')
+
+    # Move the newly created archive folder outside of the folder
+    run("mv /data/web_static/releases/{}/web_static/*\
+            /data/web_static/releases/{}/ ".format(archfile, archfile))
+
     # Create a new symbolic link
-    run('ln -s /data/web_static/current /data/web_static/releases/{}'.format(
+    sudo('ln -s /data/web_static/releases/{} /data/web_static/current'.format(
         archfile))
     return True
