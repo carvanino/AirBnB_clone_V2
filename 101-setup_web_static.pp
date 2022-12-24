@@ -1,22 +1,25 @@
-#Sets up your web servers for the deployment of web_static using Puppet
+# Sets up your web servers for the deployment of web_static using Puppet
 
 exec {'Install Nginx':
 path    => '/usr/bin',
 command => 'sudo apt-get -y install nginx',
 }
 
+exec {'Make directories':
+path    => '/usr/bin',
+command => 'sudo mkdir -p /data/web_static/releases/ && sudo mkdir -p /data/web_static/shared'
+}
+
+file {'/data/web_static/releases/test':
+ensure  => 'directory',
+}
+
 file {'/data/web_static/releases/test/index.html':
-ensure  => 'present',
 content => 'Fake Content',
 }
 
-exec {'Make directories':
-path    => '/usr/bin',
-command => 'mkdir -p /data/web_static/releases/ && mkdir -p /data/web_static/shared'
-}
-
 file {'/data/web_static/current':
-ensure => 'link',
+# ensure => 'link',
 target => '/data/web_static/releases/test'
 }
 
