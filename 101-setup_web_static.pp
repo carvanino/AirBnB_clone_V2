@@ -25,6 +25,11 @@ path    => '/usr/bin',
 command => "sudo chown -R 'ubuntu:ubuntu' /data/",
 }
 
+file {'/var/www/html/error404.html':
+ensure  => present,
+content => "Ceci n'est pas une page"
+}
+
 exec {'block server':
 path    => '/usr/bin',
 command => 'echo "
