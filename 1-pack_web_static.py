@@ -16,7 +16,7 @@ def do_pack():
 
         local('mkdir -p versions')
         arclocal = local(
-                "tar -czvf {} web_static/".format(
+                "tar -cvzf {} web_static/".format(
                     arcfile), capture=True)
         return arclocal
     except err:
