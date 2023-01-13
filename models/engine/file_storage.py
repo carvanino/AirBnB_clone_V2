@@ -63,5 +63,9 @@ class FileStorage:
         if obj is not None:
             for key, value in FileStorage.__objects.items():
                 if value == obj:
-                    del(FileStorage.__objects[key])
+                    del (FileStorage.__objects[key])
                     return
+
+    def close(self):
+        """ """
+        return self.reload()
