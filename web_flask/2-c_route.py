@@ -28,7 +28,7 @@ def use_var(text):
     """ Displays C concatenated with <text> """
 
     text = text.replace("_", " ")
-    return f'C {text}'
+    return 'C {}'.format(text)
 
 
 if __name__ == '__main__':
