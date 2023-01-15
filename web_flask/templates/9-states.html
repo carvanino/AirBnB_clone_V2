@@ -16,7 +16,7 @@
 	    </UL>
 	    {% elif states is defined %}
 	    <H1> State: {{ states.name }}  </H1>
-	    <H3> Cities </H3>
+	    <H3> Cities: </H3>
 	    <UL>
 		    {% for city in states.cities|sort(attribute='name') %}
 		    <LI>
