@@ -15,24 +15,27 @@ states = storage.all('State')
 
 @app.teardown_appcontext
 def session_remove(self):
+    """ Closes the sqlalchemy session """
+
     storage.close()
 
 
 @app.route('/states')
 def states():
+    """ Renders the 9-states.html page for all states"""
+
     states = storage.all('State')
     return render_template('9-states.html', states=states)
 
 
 @app.route('/states/<id>')
 def states_id(id):
+    """ Renders the 9-states.html page for a specific state """
+
     for key, value in storage.all('State').items():
         if value.id == id:
-            print("yes\n")
-            print(value)
             return render_template('9-states.html', states=value)
-        else:
-            return render_template('9-states.html')
+    return render_template('9-states.html')
 
 
 if __name__ == '__main__':

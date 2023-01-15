@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Starts a web application using a variable and specifying a default
-for path based the variage
+for path based the variable
 """
 
 from flask import Flask
@@ -13,23 +13,33 @@ app.url_map.strict_slashes = False
 
 @app.route('/')
 def hello_Hbnb():
+    """ Displays Hello HBNB """
+
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb')
 def hbnb():
+    """ Displays HBNB """
+
     return 'HBNB'
 
 
 @app.route('/c/<text>')
 def use_var(text):
+    """ Displays C concatinated with <text> replacing '_' with ' ' """
     # text = text.replace("_", " ")
     return f'C {escape(text)}'
+
 
 @app.route('/python/')
 @app.route('/python/<text>')
 def use_existing_var(text='is cool'):
-    #text = text.replace("_", " ")
+    """ Specifies a default value for text if /python/ has no value
+    and displays Python <text>
+    """
+
+    # text = text.replace("_", " ")
     return f'Python {escape(text)}'
     # return f'Python {escape(text)}'
 

@@ -10,12 +10,12 @@
 		<LI> 
 			{{ s_val.id }}: <B> {{ s_val.name }} </B>
 			<UL>
-			{% for key, value in cities.items()|sort(attribute='1.name') %}
-				{%- if value.state_id == s_val.id -%}
+			{% for city in s_val.cities|sort(attribute='name') %}
+				{%- if city.state_id == s_val.id  -%}
 				<LI>
-					{{ value.id }}: <B> {{ value.name }} </B>
+					{{ city.id }}: <B> {{ city.name }} </B>
 				</LI>
-				{%- endif  %}
+				{%- endif %}
 			{%- endfor %}
 			</UL>
 		</LI>

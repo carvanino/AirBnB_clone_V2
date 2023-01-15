@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
-Gets the State and the cities in a state as a list
+HBNB filters Module
 """
+
 
 from flask import Flask
 from flask import render_template
@@ -13,20 +14,20 @@ app.url_map.strict_slashes = False
 
 @app.teardown_appcontext
 def remove_session(self):
-    """ Closes sqlalchemy session """
+    """ Closes the sqlalchemy session """
 
     storage.close()
 
 
-@app.route('/cities_by_states')
-def cities_in_state():
-    """ Renders the 8-cities_by_states.html page """
+@app.route('/hbnb_filters')
+def hbnb():
+    """ Renders the 10-hbnb_filters.html """
 
-    # cities = storage.all('City')
     states = storage.all('State')
-    # print(states)
+    # cities = storage.all('City')
+    amenities = storage.all('Amenity')
     return render_template(
-            '8-cities_by_states.html', states=states)
+            '10-hbnb_filters.html', states=states, amenities=amenities)
 
 
 if __name__ == '__main__':

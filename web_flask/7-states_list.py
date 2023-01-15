@@ -12,20 +12,18 @@ app.url_map.strict_slashes = False
 
 @app.teardown_appcontext
 def remove_session(self):
+    """ Closes the sqlalchemy session """
+
     storage.close()
 
 
 @app.route('/states_list')
 def state_list():
-    states = storage.all('State')
-    print(states)
-    return render_template('7-states_list.html', states=states)
+    """  Renders the 7-states_list.html page """
 
-"""
-@app.teardown_appcontext
-def remove_session(self):
-    storage.close()
-"""
+    states = storage.all('State')
+    # print(states)
+    return render_template('7-states_list.html', states=states)
 
 
 if __name__ == "__main__":
