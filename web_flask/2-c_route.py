@@ -6,7 +6,6 @@ Starts a web application using a variable
 from flask import Flask
 from markupsafe import escape
 app = Flask(__name__)
-
 app.url_map.strict_slashes = False
 
 
@@ -28,7 +27,8 @@ def hbnb():
 def use_var(text):
     """ Displays C concatenated with <text> """
 
-    return f'C {escape(text)}'
+    text = text.replace("_", " ")
+    return f'C {text}'
 
 
 if __name__ == '__main__':
