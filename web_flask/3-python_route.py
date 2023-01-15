@@ -29,7 +29,7 @@ def hbnb():
 def use_var(text):
     """ Displays C concatinated with <text> replacing '_' with ' ' """
     # text = text.replace("_", " ")
-    return f'C {escape(text)}'
+    return 'C {}'.format(escape(text))
 
 
 @app.route('/python/')
@@ -40,7 +40,7 @@ def use_existing_var(text='is cool'):
     """
 
     # text = text.replace("_", " ")
-    return f'Python {escape(text)}'
+    return 'Python {}'.format(escape(text))
     # return f'Python {escape(text)}'
 
 

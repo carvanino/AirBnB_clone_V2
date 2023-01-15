@@ -30,7 +30,7 @@ def hbnb():
 def use_var(text):
     """ Displays C concatinated with <text> replacing '_' with ' ' """
     # text = text.replace("_", " ")
-    return f'C {escape(text)}'
+    return f'C {}'.format(escape(text))
 
 
 @app.route('/python/')
@@ -39,7 +39,7 @@ def use_existing_var(text='is cool'):
     """ Specifies a default value for text if /python/ has no value
     and displays Python <text>
     """
-    return f'Python {escape(text)}'
+    return f'Python {}'.format(escape(text))
 
 
 @app.route('/number/<int:n>')
@@ -47,7 +47,7 @@ def use_var_int(n):
     """ If n is an integer displays 'n' is a number """
 
     if type(n) == int:
-        return f'{escape(n)} is a number'
+        return f'{} is a number'.format(escape(n))
 
 
 @app.route('/number_template/<int:n>')
