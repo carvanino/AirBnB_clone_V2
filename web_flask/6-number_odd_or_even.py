@@ -31,7 +31,7 @@ def use_var(text):
     """ Displays C concatinated with <text> replacing '_' with ' ' """
 
     # text = text.replace("_", " ")
-    return f'C {}'.format(escape(text))
+    return 'C {}'.format(escape(text))
 
 
 @app.route('/python/')
@@ -41,7 +41,7 @@ def use_existing_var(text='is cool'):
     and displays Python <text>
     """
 
-    return f'Python {}'.format(escape(text))
+    return 'Python {}'.format(escape(text))
 
 
 @app.route('/number/<int:n>')
@@ -49,7 +49,7 @@ def use_var_int(n):
     """  If n is an integer displays 'n' is a number """
 
     if type(n) == int:
-        return f'{} is a number'.format(escape(n))
+        return '{} is a number'.format(escape(n))
 
 
 @app.route('/number_template/<int:n>')
