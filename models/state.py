@@ -22,6 +22,7 @@ else:
         @property
         def cities(self):
             """City objects getter"""
+
             from models import storage
             from models.city import City
             related_cities = []
@@ -29,4 +30,4 @@ else:
             for key, value in objects.items():
                 if value.state_id == self.id:
                     related_cities.append(value)
-                    return related_cities
+            return related_cities

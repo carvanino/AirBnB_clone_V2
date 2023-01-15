@@ -67,5 +67,6 @@ class FileStorage:
                     return
 
     def close(self):
-        """ """
+        """ Reloads the database """
+
         return self.reload()
