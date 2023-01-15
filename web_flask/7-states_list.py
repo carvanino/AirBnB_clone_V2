@@ -1,4 +1,4 @@
-#!/usr//bin/python3
+#!/usr/bin/python3
 """
 Gets all state and render as a list
 """
