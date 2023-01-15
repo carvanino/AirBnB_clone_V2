@@ -38,8 +38,8 @@ def use_existing_var(text='is cool'):
     and displays Python <text>
     """
 
-    # text = text.replace("_", " ")
-    return 'Python {}'.format(escape(text))
+    text = text.replace("_", " ")
+    return 'Python {}'.format(text)
     # return f'Python {escape(text)}'
 
 
